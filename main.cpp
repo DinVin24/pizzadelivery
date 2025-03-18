@@ -1,11 +1,5 @@
 /**     Pizza Delivery(Pizza, Clienti, Adrese)
 
-Testoasele ninja au devenit infometate dupa lupte crancene cu inamicii New York-ului.
-Astfel, doresc sa isi comande 10 pizza maaari cu branza si peperoni.
-Ei isi introduc pe
-
-
-
 Fiecare client are o adresa, si niste pizza, oricate
 Mai multe tipuri de pizza
 
@@ -21,9 +15,11 @@ using namespace std;
 int main()
 {
     Client daniel;
-    daniel.citire_date();
-    daniel.set_adresa();
-    daniel.get_adresa();
-    cout<<daniel.nume;
+    // daniel.citire_date();
+    // daniel.afisare_informatii();
+
+    Pizza test(10);
+    cout<<test.diametru;
+
     return 0;
 }

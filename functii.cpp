@@ -7,6 +7,12 @@ void Client::citire_date() {
     cout<<"----------Informatii Client:----------\n";
     cout<<"Nume si Prenume: ";
     cin.getline(nume,100);
+    this->adresa.citire_adresa();
+}
+void Client::afisare_informatii(){
+    cout<<"------------Informatii Client:----------\n";
+    cout<<"Nume si Prenume: "<<nume<<'\n';
+    this->adresa.afisare_adresa();
 }
 void Adresa::citire_adresa(){
     cout<<"------------ADRESA------------\n";

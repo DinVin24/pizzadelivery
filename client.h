@@ -12,5 +12,6 @@ public:
     void get_nume();
 
     void citire_date();
+    void afisare_informatii();
 
 };
