@@ -1,23 +1,30 @@
-class Adresa{
-    char strada[100]={};
-    char numarul[100]={};
-    char bloc[50]={};
-    char apartament[50]={};
+#include <string>
+#include <iostream>
+
+class Adresa {
+    std::string strada;
+    std::string numarul;
+    std::string bloc;
+    std::string apartament;
 
 public:
+    // Constructor to initialize the address fields
+    Adresa(const std::string& strada_input = "", const std::string& numar_input = "",
+           const std::string& bloc_input = "", const std::string& apartament_input = "")
+        : strada(strada_input), numarul(numar_input), bloc(bloc_input), apartament(apartament_input) {}
 
-    void citire_adresa();
-    void afisare_adresa();
+    // Getter functions
+    const std::string& get_strada() const { return strada; }
+    const std::string& get_numarul() const { return numarul; }
+    const std::string& get_bloc() const { return bloc; }
+    const std::string& get_apartament() const { return apartament; }
 
-    void set_numarul(){std::cin.getline(numarul,100);}
-    void set_strada(){std::cin.getline(strada,100);}
-    void set_apartament(){std::cin.getline(apartament,50);}
-    void set_bloc(){std::cin.getline(bloc,50);}
+    // Setter functions
+    void set_strada(const std::string& strada_input) { strada = strada_input; }
+    void set_numarul(const std::string& numar_input) { numarul = numar_input; }
+    void set_bloc(const std::string& bloc_input) { bloc = bloc_input; }
+    void set_apartament(const std::string& apartament_input) { apartament = apartament_input; }
 
-    char* get_strada(){return strada;}
-    char* get_numarul(){return numarul;}
-    char* get_bloc(){return bloc;}
-    char* get_apartament(){return apartament;}
-
+    // Function to display the address
+    friend void afisare_adresa(const Adresa& adresa);
 };
-

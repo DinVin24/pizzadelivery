@@ -1,25 +1,24 @@
 /**     Pizza Delivery(Pizza, Clienti, Adrese)
 
-Fiecare client are o adresa, si niste pizza, oricate
-Mai multe tipuri de pizza
+Date de intrare:
+Numele clientulu, Adresa (strada, numar, oras, bloc, apartament),
+pizza (mare/mica/medie, sos, branza, topping-uri)
 
-Pt fiecare client, citim adresa si tipul de pizza dorit
-
-mica, medie, mare
-si alte tipuri de pizza care-mi mai vin mie in minte mai
-tarziu, pana atunci le denumesc 1,2,3 etcc... 2-10
+Date de iesire:
+Confirmarea comenzii (client, adresa, pizza),
+Pret
 **/
-#include "functii.cpp"
-using namespace std;
+#include <iostream>
+#include "functii.cpp"  // Include the function definitions
 
-int main()
-{
-    Client daniel;
-    // daniel.citire_date();
-    // daniel.afisare_informatii();
+int main() {
+    // Client daniel;
+    // citire_date(daniel);
+    //
+    // afisare_informatii(daniel);
 
-    Pizza test(10);
-    cout<<test.diametru;
-
+    Pizza gigel;
+    citire_pizza(gigel);
+    afisare_pizza(gigel);
     return 0;
 }

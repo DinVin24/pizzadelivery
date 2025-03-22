@@ -14,11 +14,32 @@
  *  totodata, ar trebui sa poti selecta intre pizza deja facute sau sa-ti creezi propria ta pizza.
  */
 
+//char branza[1001]={};
+//char carne[1001]={};
+//char legume[1001]={};
+
+
 class Pizza {
     int marime;//1-mica 2-medie 3-mare
-    char branza[1001]={};
-    char carne[1001]={};
-    char legume[1001]={};
+    int sos; //  rosii/iute/barbeque
+    bool extra_sos;
 public:
-    Pizza(int m){marime = m;}
+    struct Branza {
+        bool selected = false;
+        bool extra = false;
+    }branza[6];
+    Pizza(int m=2): marime(m),sos(1),extra_sos(false) {}
+
+    int get_marime() const {return marime;}
+    void set_marime(int m) {marime=m;}
+
+    void set_sos(int s) {sos=s;}
+    int get_sos() const {return sos;}
+
+    void set_extra_sos(bool e) {extra_sos=e;}
+    bool get_extra_sos() const {return extra_sos;}
+
+    void set_branza(int index, bool extra);
+    void selectie_branza()const;
+
 };

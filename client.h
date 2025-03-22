@@ -1,17 +1,22 @@
 #include "adresa.h"
-class Client{
-    char nume[100]={};
+#include <string>
+
+class Client {
+    std::string nume;  // Use std::string instead of char array
     Adresa adresa;
 
 public:
-    void set_adresa(){adresa.citire_adresa();}
-    void get_adresa(){adresa.afisare_adresa();}
+    // Constructor to initialize the name and address
+    Client(const std::string& nume_input = "", const Adresa& adresa_input = Adresa())
+        : nume(nume_input), adresa(adresa_input) {}
 
-    void set_nume(){std::cin.getline(nume,100);}
+    // Setter and Getter functions for name
+    void set_nume(const std::string& nume_input) { nume = nume_input; }
+    const std::string& get_nume() const { return nume; }
 
-    void get_nume();
-
-    void citire_date();
-    void afisare_informatii();
-
+    // Setter and Getter functions for address
+    void set_adresa(const Adresa& adresa_input) { adresa = adresa_input; }
+    const Adresa& get_adresa() const { return adresa; }
 };
+
+
