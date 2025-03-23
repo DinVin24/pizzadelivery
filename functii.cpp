@@ -1,5 +1,7 @@
 #include <iostream>
 #include "client.h"
+#include <fstream>
+std::ifstream fin ("input.txt");
 
 // Function to read client data
 void citire_pizza(Pizza& pizza);
@@ -7,19 +9,19 @@ void afisare_pizza(const Pizza& pizza);
 void citire_date(Client& client) {
     std::string nume_input;
     std::cout << "Nume: ";
-    std::getline(std::cin, nume_input);
+    std::getline(fin, nume_input);
     client.set_nume(nume_input);
 
     // Now, reading the address
     std::string strada, numar, bloc, apartament;
     std::cout << "Strada: ";
-    std::getline(std::cin, strada);
+    std::getline(fin, strada);
     std::cout << "Numarul: ";
-    std::getline(std::cin, numar);
+    std::getline(fin, numar);
     std::cout << "Blocul (Enter daca nu este cazul): ";
-    std::getline(std::cin, bloc);
+    std::getline(fin, bloc);
     std::cout << "Apartamentul (Enter daca nu este cazul): ";
-    std::getline(std::cin, apartament);
+    std::getline(fin, apartament);
 
     Adresa adresa(strada, numar, bloc, apartament);
     client.set_adresa(adresa);
@@ -47,7 +49,7 @@ void citire_pizza(Pizza& pizza) {
     //Citire marime
     int size;
     std::cout << "Alege dimensiunea pizzei:\n1 - Mica\n2 - Medie\n3 - Mare\n ";
-    std::cin >> size;
+    fin >> size;
 
     // Daca utilizatorul este incapatanat...
     if (size >= 1 && size <= 3) {
@@ -59,7 +61,7 @@ void citire_pizza(Pizza& pizza) {
     //Citire sos
     int sos_ales;
     std::cout << "Alegeti sosul:\n1 - Rosii\n2 - Iute\n3 - Barbeque\n";
-    std::cin >> sos_ales;
+    fin >> sos_ales;
     if (1<=sos_ales && sos_ales<=3)
         pizza.set_sos(sos_ales);
     else {
@@ -68,7 +70,7 @@ void citire_pizza(Pizza& pizza) {
     }
     std::string extra;
     std::cout<<"Doriti sos extra? (y/n): ";
-    std::cin>>extra;
+    fin>>extra;
     pizza.set_extra_sos(extra == "y");
     //Citire branza...
     std::string numeBranza[]={"","mozzarella","telemea","cu mucegai","cheddar","parmezan"};
@@ -77,13 +79,13 @@ void citire_pizza(Pizza& pizza) {
     while (!exit) {
         std::cout<<"Alegeti branza (1-5):\n";
         pizza.selectie_branza();
-        std::cin>>option;
+        fin>>option;
         if (option == 6) exit = true;
         else if (1>option || 6<option) std::cout<<"Optiune invalida, mai incercati o data... \n";
         else {
             pizza.branza[option].selected = true;
             std::cout<<"Doriti extra branza "<< numeBranza[option] <<"? (y/n)\n";
-            std::cin>>extra;
+            fin>>extra;
             pizza.branza[option].extra = (extra == "y");
         }
     }
@@ -93,13 +95,13 @@ void citire_pizza(Pizza& pizza) {
     while (!exit) {
         std::cout<<"Alegeti carne (1-8):\n";
         pizza.selectie_carne();
-        std::cin>>option;
+        fin>>option;
         if (option == 9) exit = true;
         else if (1>option || 8<option) std::cout<<"Optiune invalida, mai incercati o data... \n";
         else {
             pizza.carne[option].selected = true;
             std::cout<<"Doriti extra carne "<<numeCarne[option] <<"? (y/n)\n";
-            std::cin>>extra;
+            fin>>extra;
             pizza.carne[option].extra = (extra == "y");
         }
     }
@@ -109,13 +111,13 @@ void citire_pizza(Pizza& pizza) {
     while (!exit) {
         std::cout<<"Alegeti legume (1-8):\n";
         pizza.selectie_legume();
-        std::cin>>option;
+        fin>>option;
         if (option == 9) exit = true;
         else if (1>option || 8 < option) std::cout<<"Optiune invalida, mai incercati o data... \n";
         else {
             pizza.legume[option].selected = true;
             std::cout<<"Doriti extra "<<numeLegume[option]<<"? (y/n)\n";
-            std::cin>>extra;
+            fin>>extra;
             pizza.legume[option].extra = (extra == "y");
         }
     }
