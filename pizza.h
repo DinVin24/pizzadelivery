@@ -34,8 +34,20 @@ public:
         bool selected = false;
         bool extra = false;
     }legume[9];
-    //TODO: pizza constructor :(
-    Pizza(int m=2): marime(m),sos(1),extra_sos(false) {}
+
+    Pizza(int m=2): marime(m),sos(1),extra_sos(false) {
+        int i;
+        for (i=1;i<=5;i++) {
+            branza[i].selected = false;
+            branza[i].extra = false;
+        }
+        for (i=1;i<=8;i++) {
+            carne[i].selected = false;
+            carne[i].extra = false;
+            legume[i].selected = false;
+            legume[i].extra = false;
+        }
+    }
 
     int get_marime() const {return marime;}
     void set_marime(int m) {marime=m;}

@@ -3,7 +3,7 @@
 
 // Function to read client data
 void citire_pizza(Pizza& pizza);
-void afisare_pizza(Pizza& pizza);
+void afisare_pizza(const Pizza& pizza);
 void citire_date(Client& client) {
     std::string nume_input;
     std::cout << "Nume: ";
@@ -23,7 +23,9 @@ void citire_date(Client& client) {
 
     Adresa adresa(strada, numar, bloc, apartament);
     client.set_adresa(adresa);
-    citire_pizza(client.pizza);
+    Pizza pizza;
+    citire_pizza(pizza);
+    client.set_pizza(pizza);
 
 }
 
@@ -38,7 +40,7 @@ void afisare_adresa(const Adresa& adresa) {
 void afisare_informatii(const Client& client) {
     std::cout << "Nume: " << client.get_nume() << std::endl;
     afisare_adresa(client.get_adresa());
-    afisare_pizza(client.pizza);
+    afisare_pizza(client.get_pizza());
 }
 
 void citire_pizza(Pizza& pizza) {
@@ -119,7 +121,7 @@ void citire_pizza(Pizza& pizza) {
     }
 }
 
-void afisare_pizza(const Pizza pizza) {
+void afisare_pizza(const Pizza& pizza) {
     //Afisare marime
     int size = pizza.get_marime();
     std::cout << "Dimensiunea pizzei este: ";
