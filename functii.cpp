@@ -1,8 +1,9 @@
 #include <iostream>
 #include "client.h"
-#include "pizza.h"
 
 // Function to read client data
+void citire_pizza(Pizza& pizza);
+void afisare_pizza(Pizza& pizza);
 void citire_date(Client& client) {
     std::string nume_input;
     std::cout << "Nume: ";
@@ -22,6 +23,8 @@ void citire_date(Client& client) {
 
     Adresa adresa(strada, numar, bloc, apartament);
     client.set_adresa(adresa);
+    citire_pizza(client.pizza);
+
 }
 
 void afisare_adresa(const Adresa& adresa) {
@@ -35,6 +38,7 @@ void afisare_adresa(const Adresa& adresa) {
 void afisare_informatii(const Client& client) {
     std::cout << "Nume: " << client.get_nume() << std::endl;
     afisare_adresa(client.get_adresa());
+    afisare_pizza(client.pizza);
 }
 
 void citire_pizza(Pizza& pizza) {
@@ -72,13 +76,8 @@ void citire_pizza(Pizza& pizza) {
         std::cout<<"Alegeti branza (1-5):\n";
         pizza.selectie_branza();
         std::cin>>option;
-        if (option == 6) {
-            exit = true;
-            continue;
-        }
-        else if (1>option || 6<option) {
-            std::cout<<"Opzione invalida, mai incercati o data... \n";
-        }
+        if (option == 6) exit = true;
+        else if (1>option || 6<option) std::cout<<"Optiune invalida, mai incercati o data... \n";
         else {
             pizza.branza[option].selected = true;
             std::cout<<"Doriti extra branza "<< numeBranza[option] <<"? (y/n)\n";
@@ -86,9 +85,41 @@ void citire_pizza(Pizza& pizza) {
             pizza.branza[option].extra = (extra == "y");
         }
     }
+    //Citire carne....
+    std::string numeCarne[]={"","carnati","bacon","sunca","pepperoni","chorizo","vita","pui","ton"};
+    exit = false;
+    while (!exit) {
+        std::cout<<"Alegeti carne (1-8):\n";
+        pizza.selectie_carne();
+        std::cin>>option;
+        if (option == 9) exit = true;
+        else if (1>option || 8<option) std::cout<<"Optiune invalida, mai incercati o data... \n";
+        else {
+            pizza.carne[option].selected = true;
+            std::cout<<"Doriti extra carne "<<numeCarne[option] <<"? (y/n)\n";
+            std::cin>>extra;
+            pizza.carne[option].extra = (extra == "y");
+        }
+    }
+    //Citire legume...
+    std::string numeLegume[]={"","muraturi","masline","porumb","rosii","paprika","ceapa","jalapeno","ciuperci"};
+    exit = false;
+    while (!exit) {
+        std::cout<<"Alegeti legume (1-8):\n";
+        pizza.selectie_legume();
+        std::cin>>option;
+        if (option == 9) exit = true;
+        else if (1>option || 8 < option) std::cout<<"Optiune invalida, mai incercati o data... \n";
+        else {
+            pizza.legume[option].selected = true;
+            std::cout<<"Doriti extra "<<numeLegume[option]<<"? (y/n)\n";
+            std::cin>>extra;
+            pizza.legume[option].extra = (extra == "y");
+        }
+    }
 }
 
-void afisare_pizza(const Pizza& pizza) {
+void afisare_pizza(const Pizza pizza) {
     //Afisare marime
     int size = pizza.get_marime();
     std::cout << "Dimensiunea pizzei este: ";
@@ -128,7 +159,26 @@ void afisare_pizza(const Pizza& pizza) {
             std::cout<<numeBranza[i]<<'\n';
         }
     }
-    std::cout<<"\n";
+    //Afisare carne...
+    std::cout<<"Carne: \n";
+    std::string numeCarne[]={"","carnati","bacon","sunca","pepperoni","chorizo","vita","pui","ton"};
+    for (int i=1;i<=8;i++) {
+        if (pizza.carne[i].selected) {
+            std::cout<<" - ";
+            if (pizza.carne[i].extra) std::cout<<"extra ";
+            std::cout<<numeCarne[i]<<'\n';
+        }
+    }
+    //Afisare legume...
+    std::cout<<"Legume: \n";
+    std::string numeLegume[]={"","muraturi","masline","porumb","rosii","paprika","ceapa","jalapeno","ciuperci"};
+    for (int i=1;i<=8;i++) {
+        if (pizza.legume[i].selected) {
+            std::cout<<" - ";
+            if (pizza.legume[i].extra) std::cout<<"extra ";
+            std::cout<<numeLegume[i]<<'\n';
+        }
+    }
 }
 void Pizza::selectie_branza() const{
     std::string numeBranza[]={"","mozzarella","telemea","cu mucegai","cheddar","parmezan"};
@@ -141,9 +191,46 @@ void Pizza::selectie_branza() const{
     }
     std::cout<<"6 - Iesire\n";
 }
+void Pizza::selectie_carne() const {
+    //carnati, bacon, sunca, pepperoni, chorizo, vita, pui, ton
+    std::string numeCarne[]={"","carnati","bacon","sunca","pepperoni","chorizo","vita","pui","ton"};
+    for (int i=1;i<=8;i++) {
+        std::cout<<i<<" - "<<numeCarne[i]<<" ";
+        if (carne[i].extra) std::cout<<"[+]";
+        else if (carne[i].selected) std::cout<<"[1]";
+        else std::cout<<"[ ]";
+        std::cout<<"\n";
+    }
+    std::cout<<"9 - Iesire\n";
+}
+void Pizza::selectie_legume() const {
+    //muraturi, masline, porumb, rosii, paprika, ceapa, jalapeno, ciuperci
+    std::string numeLegume[]={"","muraturi","masline","porumb","rosii","paprika","ceapa","jalapeno","ciuperci"};
+    for (int i=1;i<=8;i++) {
+        std::cout<<i<<" - "<<numeLegume[i]<<" ";
+        if (legume[i].extra) std::cout<<"[+]";
+        else if (legume[i].selected) std::cout<<"[1]";
+        else std::cout<<"[ ]";
+        std::cout<<"\n";
+    }
+    std::cout<<"9 - Iesire\n";
+}
+
 void Pizza::set_branza(int index, bool extra) {
     if (index >=1 && index <= 6) {
         branza[index].extra = extra;
         branza[index].selected = true;
+    }
+}
+void Pizza::set_carne(int index, bool extra) {
+    if (index >=1 && index <= 8) {
+        carne[index].extra = extra;
+        carne[index].selected = true;
+    }
+}
+void Pizza::set_legume(int index, bool extra) {
+    if (index >=1 && index <= 8) {
+        legume[index].extra = extra;
+        legume[index].selected = true;
     }
 }

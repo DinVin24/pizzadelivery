@@ -14,8 +14,6 @@
  *  totodata, ar trebui sa poti selecta intre pizza deja facute sau sa-ti creezi propria ta pizza.
  */
 
-//char branza[1001]={};
-//char carne[1001]={};
 //char legume[1001]={};
 
 
@@ -28,6 +26,15 @@ public:
         bool selected = false;
         bool extra = false;
     }branza[6];
+    struct Carne {
+        bool selected = false;
+        bool extra = false;
+    }carne[9];
+    struct Legume {
+        bool selected = false;
+        bool extra = false;
+    }legume[9];
+    //TODO: pizza constructor :(
     Pizza(int m=2): marime(m),sos(1),extra_sos(false) {}
 
     int get_marime() const {return marime;}
@@ -41,5 +48,11 @@ public:
 
     void set_branza(int index, bool extra);
     void selectie_branza()const;
+
+    void set_carne(int index, bool extra);
+    void selectie_carne()const;
+
+    void set_legume(int index, bool extra);
+    void selectie_legume()const;
 
 };
