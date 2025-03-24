@@ -8,10 +8,8 @@ Date de iesire:
 Confirmarea comenzii (client, adresa, pizza),
 Pret
 **/
-#include <iostream>
-#include "functii.cpp"  // Include the function definitions
 
-
+#include "functii.cpp"
 int main() {
     std::cout << R"($$$$$$$\  $$\                                    $$$$$$$\            $$\ $$\
 $$  __$$\ \__|                                   $$  __$$\           $$ |\__|
@@ -24,18 +22,14 @@ $$ |      $$ |$$$$$$$$\ $$$$$$$$\\$$$$$$$ |      $$$$$$$  |\$$$$$$$\ $$ |$$ |   
                                                                                                             $$\   $$ |
                                                                                                             \$$$$$$  |
                                                                                                              \______/ )";
-    // Adresa atest("independentei","49","B3","17");
-    // Pizza ptest (1,1,1,1,1);
-    // Client test ("test",atest,ptest);
-    // std::cout<<test;
-    //De aici fac un meniu frumos, poate-l bag dupa in functii.cpp
-    //TODO: sa poti sterge un client
-    //TODO: pizza template pt oameni fara creativitate (ca mn)
-    //TODO: ai nev. de fct mai complexe
-    //TODO: scrie descrierea problemei
+
+
+
+    init_pizza();
     int optiune=1;
     int nrclienti=0;
-    Client clienti[1001];
+    std::vector<Client> clienti;
+    Client client_temp;
     while (optiune!=4) {
         std::cout<<"\nCe doriti sa faceti?!!!?!?!!?!?!\n";
         std::cout<<"1 - Adaugare client\n";
@@ -46,13 +40,20 @@ $$ |      $$ |$$$$$$$$\ $$$$$$$$\\$$$$$$$ |      $$$$$$$  |\$$$$$$$\ $$ |$$ |   
         std::cin.ignore();
         switch (optiune) {
             case 1:
-                citire_date(clienti[nrclienti++]);
+                citire_date(client_temp);
+                clienti.push_back(client_temp);
+                nrclienti++;
                 break;
             case 2:
-                std::cout<<"Programatorul nostru inca nu a adaugat aceasta functionalitate...\n";
+                int cod_client;
+                std::cout<<"Introduceti codul clientului: ";
+                std::cin>>cod_client;
+                clienti.erase(clienti.begin()+cod_client);
+                nrclienti--;
                 break;
             case 3:
                 for (int i = 0; i < nrclienti; i++) {
+                    std::cout<<"-------- "<<i<<" --------\n";
                     std::cout<<clienti[i]<<"\n";
                 }
                 break;

@@ -96,13 +96,13 @@ public:
     void set_extra_sos(bool e) {extra_sos=e;}
     bool get_extra_sos() const {return extra_sos;}
 
-    void set_branza(int index, bool extra);
+    void set_branza(int index, bool extra=false);
     void selectie_branza()const;
 
-    void set_carne(int index, bool extra);
+    void set_carne(int index, bool extra=false);
     void selectie_carne()const;
 
-    void set_legume(int index, bool extra);
+    void set_legume(int index, bool extra=false);
     void selectie_legume()const;
 
     int get_pret()const {return pret;}

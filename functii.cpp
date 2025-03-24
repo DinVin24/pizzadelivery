@@ -1,7 +1,34 @@
 #include <iostream>
 #include "client.h"
 #include <fstream>
+#include <vector>
 std::ifstream fin ("input.txt");
+Pizza clasica(1,1,1,3,8);
+Pizza vegetariana(1,1,1);
+Pizza pepperoni(1,1);
+Pizza quattrostagioni(1,1,1);
+Pizza mediteraneana(1,1,1);
+Pizza cuTon(1,1,1,8);
+Pizza mexicana(1,1,1,2,7);
+Pizza carnivora(1,1,1,1);
+Pizza chefFav(1);
+void init_pizza() {
+    for (int i = 2; i<=8;i++) {
+        if (i==7)continue;;
+        vegetariana.set_legume(i);
+    }
+    pepperoni.set_branza(1,true);
+    pepperoni.set_carne(4,true);
+    quattrostagioni.set_carne(3);quattrostagioni.set_carne(5);
+    quattrostagioni.set_legume(8);quattrostagioni.set_legume(5);
+    cuTon.set_legume(2);cuTon.set_legume(3);cuTon.set_legume(6);
+    mediteraneana.set_branza(2);
+    mediteraneana.set_legume(3);mediteraneana.set_legume(4);
+    mediteraneana.set_legume(2);mediteraneana.set_legume(6);
+    mexicana.set_carne(5);mexicana.set_carne(3);
+    carnivora.set_carne(4);carnivora.set_carne(6);carnivora.set_carne(3);
+}
+
 
 // Function to read client data
 void citire_pizza(Pizza& pizza);
@@ -24,7 +51,17 @@ void citire_date(Client& client) {
 
     Adresa adresa(strada, numar, bloc, apartament);
     client.set_adresa(adresa);
-    Pizza pizza;
+
+    Pizza pizza;int option;
+    Pizza meniu[]={clasica,vegetariana,pepperoni,quattrostagioni,mediteraneana,
+                cuTon, mexicana, carnivora, chefFav};
+    std::cout<<"Alegeti o pizza:\n1 - Clasica\n2 - Vegetariana\n3 - Pepperoni\n"
+             <<"4 - Quattro Stagioni\n5 - Mediteraneana\n6 - cu ton\n7 - Mexicana\n"
+        <<"8 - Carnivora\n9 - Preferata bucatarului <3\n0 - Creeaza propria pizza\n";
+    std::cin>>option;
+    if (option >=1 && option <=9) {
+        pizza = meniu[option-1];
+    }
     citire_pizza(pizza);
     client.set_pizza(pizza);
 
@@ -72,7 +109,10 @@ void citire_pizza(Pizza& pizza) {
         pizza.selectie_branza();
         std::cin>>option;
         if (option == 6) exit = true;
-        else if (1>option || 6<option) std::cout<<"Optiune invalida, mai incercati o data... \n";
+        else if (1>option || 6<option) {
+            std::cout<<"Optiune invalida, mai incercati o data... \n";
+            std::cin.ignore();
+        }
         else {
             pizza.branza[option].selected = true;
             std::cout<<"Doriti extra branza "<< numeBranza[option] <<"? (y/n)\n";
