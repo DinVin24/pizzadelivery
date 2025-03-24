@@ -24,9 +24,15 @@ $$ |      $$ |$$$$$$$$\ $$$$$$$$\\$$$$$$$ |      $$$$$$$  |\$$$$$$$\ $$ |$$ |   
                                                                                                             $$\   $$ |
                                                                                                             \$$$$$$  |
                                                                                                              \______/ )";
-
-
+    // Adresa atest("independentei","49","B3","17");
+    // Pizza ptest (1,1,1,1,1);
+    // Client test ("test",atest,ptest);
+    // std::cout<<test;
     //De aici fac un meniu frumos, poate-l bag dupa in functii.cpp
+    //TODO: sa poti sterge un client
+    //TODO: pizza template pt oameni fara creativitate (ca mn)
+    //TODO: ai nev. de fct mai complexe
+    //TODO: scrie descrierea problemei
     int optiune=1;
     int nrclienti=0;
     Client clienti[1001];
@@ -37,7 +43,7 @@ $$ |      $$ |$$$$$$$$\ $$$$$$$$\\$$$$$$$ |      $$$$$$$  |\$$$$$$$\ $$ |$$ |   
         std::cout<<"3 - Afisare clienti\n";
         std::cout<<"4 - Iesire\n";
         std::cin>>optiune;
-        fin.ignore();
+        std::cin.ignore();
         switch (optiune) {
             case 1:
                 citire_date(clienti[nrclienti++]);
@@ -47,23 +53,10 @@ $$ |      $$ |$$$$$$$$\ $$$$$$$$\\$$$$$$$ |      $$$$$$$  |\$$$$$$$\ $$ |$$ |   
                 break;
             case 3:
                 for (int i = 0; i < nrclienti; i++) {
-                    afisare_informatii(clienti[i]);
+                    std::cout<<clienti[i]<<"\n";
                 }
                 break;
         }
     }
-
-
-
-    // int nrclienti;
-    // std::cout<<"INTRODUCETI NUMARUL DE CLIENTI: ";
-    // fin>>nrclienti;
-    // for (int i = 0; i < nrclienti; i++) {
-    //     fin.ignore();
-    //     citire_date(clienti[i]);
-    // }
-    // for (int i = 0; i < nrclienti; i++) {
-    //     afisare_informatii(clienti[i]);
-    // }
     return 0;
 }
