@@ -1,22 +1,18 @@
-/*  Okay deci pe domion's cand intri, poti selecta intre mica/mare/medie
+/*  Okay deci pe domino's cand intri, poti selecta intre mica/mare/medie
  *  Poti selecta si tipul de blat dar bucataria noastra nu dispune de astfel de tehnologii...
  *  Topping-uri default sunt sos de pizza si mozzarella
- *  Sosuri quirky: iute, barbeque. La toate poti adauga optiunea de extra, un BOOL
- *  Branza quirky: Telemea, cu mucegai, cheddar, parmezan, toate au iarasi optiunea extra
+ *  Sosuri: iute, barbeque. La toate poti adauga optiunea de extra, un BOOL
+ *  Branza: Telemea, cu mucegai, cheddar, parmezan, toate au iarasi optiunea extra
  *  CARNE: carnati, bacon, sunca, pepperoni, chorizo, vita, pui, ton
  *  LEGUME: muraturi, masline, porumb, rosii, paprika, ceapa, jalapeno, ciuperci
  *
  *  poti avea UN singur sos, la restul poti sa adaugi cate chestii vrei din optiunile alea, plus extra, evident
- *  totodata, poti sa nu pui nimic, sa ai 0 ingrediente, doar blat
+ *  totodata, poti sa nu pui nimic, sa ai 0 ingrediente, doar blat cu sos de rosii.
  *
- *  la final ar fi cool sa calculezi pretul
+ *  la fiecare setter apelat, se actualizeaza si pretul
  *  Pretul de baza este 23. medie + 13, mare + 25
  *  Sos diferit de rosii + 5
- *  FIECARE EXTRA + 5
- *  Branza + 5
- *  Carne + 5
- *  Legume + 5
- *  totodata, ar trebui sa poti selecta intre pizza deja facute sau sa-ti creezi propria ta pizza.
+ *  FIECARE topping si fiecare extra + 5
  */
 
 class Pizza {
@@ -40,6 +36,8 @@ public:
 
     // Constructor cu parametri
     Pizza(int m=1, int s=1,int b=0, int c=0, int l=0): marime(m),sos(s),extra_sos(false) {
+    //urmatoarele for-uri functioneaza mai bine pt pizza mai simple, cu cate un singur topping
+    //pentru celelalte, folosim functiile setter
         int i;
         for (i=1;i<=5;i++) {
             branza[i].selected = false;
@@ -109,6 +107,7 @@ public:
     void set_pret(int p) {pret=p;}
 
     friend std::ostream& operator<<(std::ostream& os, const Pizza& pizza) {
+    //overload la <<
         //Afisarea dimensiunii
         os << "Dimensiunea pizzei este: ";
         switch (pizza.get_marime()) {

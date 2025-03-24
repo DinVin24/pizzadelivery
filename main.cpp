@@ -1,12 +1,21 @@
 /**     Pizza Delivery(Pizza, Clienti, Adrese)
+Descrierea problemei
+Utilizatorul este intampinat de o serie de meniuri.
+Primul are optiunile de adaugrare/stergere/afisare clienti sau iesire
+Se citeste numarul la tastatura corespunzator deciziei (asta se va
+                                intampla la fiecare meniu intampinat)
+La adaugarea unui client, trebuie introduse numele si adresa
+(strada, numar, bloc apartament), toate sunt siruri de caractere
+Apoi trebuie aleasa pizza, din nou apare un meniu cu mai multe pizza,
+dupa ce este aleasa una, poate fi modificata iarasi, printr-un meniu
+(marime, sos, topping-uri). La fiecare alegere pretul pizzei este actualizat
 
-Date de intrare:
-Numele clientulu, Adresa (strada, numar, oras, bloc, apartament),
-pizza (mare/mica/medie, sos, branza, topping-uri)
+La stergerea unui client, trebuie sa introducem codul (indexul) acestuia
 
-Date de iesire:
-Confirmarea comenzii (client, adresa, pizza),
-Pret
+La afisarea clientilor, vor fi afisate informatiile tuturor clientilor
+(index, nume, adresa (strada, numar, bloc apartament), pizza (sos, branza, topping-uri, pret))
+
+La iesire se termina programul.
 **/
 
 #include "functii.cpp"
@@ -25,16 +34,14 @@ $$ |      $$ |$$$$$$$$\ $$$$$$$$\\$$$$$$$ |      $$$$$$$  |\$$$$$$$\ $$ |$$ |   
 
 
 
-    init_pizza();
+    init_pizza();//initializam meniul de pizza
     int optiune=1;
     int nrclienti=0;
     std::vector<Client> clienti;
-    Client client_temp;
+    Client client_temp;//client temporar
     while (optiune!=4) {
-        std::cout<<"\nCe doriti sa faceti?!!!?!?!!?!?!\n";
-        std::cout<<"1 - Adaugare client\n";
-        std::cout<<"2 - Stergere client\n";
-        std::cout<<"3 - Afisare clienti\n";
+        std::cout<<"\nCe doriti sa faceti?\n"<<"1 - Adaugare client\n";
+        std::cout<<"2 - Stergere client\n"<<"3 - Afisare clienti\n";
         std::cout<<"4 - Iesire\n";
         std::cin>>optiune;
         std::cin.ignore();

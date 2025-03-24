@@ -29,16 +29,15 @@ void init_pizza() {
     carnivora.set_carne(4);carnivora.set_carne(6);carnivora.set_carne(3);
 }
 
-
-// Function to read client data
 void citire_pizza(Pizza& pizza);
 void citire_date(Client& client) {
+    //Citim numele clientului
     std::string nume_input;
     std::cout << "Nume: ";
     std::getline(std::cin, nume_input);
     client.set_nume(nume_input);
 
-    // Now, reading the address
+    //Citim adresa clientului
     std::string strada, numar, bloc, apartament;
     std::cout << "Strada: ";
     std::getline(std::cin, strada);
@@ -52,6 +51,7 @@ void citire_date(Client& client) {
     Adresa adresa(strada, numar, bloc, apartament);
     client.set_adresa(adresa);
 
+    //Citim pizza clientului, mai intai alege dintr-un meniu apoi o modifica
     Pizza pizza;int option;
     Pizza meniu[]={clasica,vegetariana,pepperoni,quattrostagioni,mediteraneana,
                 cuTon, mexicana, carnivora, chefFav};
@@ -155,6 +155,8 @@ void citire_pizza(Pizza& pizza) {
 }
 
 void Pizza::selectie_branza() const{
+//Functia asta doar afiseaza meniul de branza,
+//actualizat la alegerile facute
     std::string numeBranza[]={"","mozzarella","telemea","cu mucegai","cheddar","parmezan"};
     for (int i=1;i<=5;i++) {
         std::cout<<i<<" - "<<numeBranza[i]<<" ";
@@ -166,7 +168,8 @@ void Pizza::selectie_branza() const{
     std::cout<<"6 - Iesire\n";
 }
 void Pizza::selectie_carne() const {
-    //carnati, bacon, sunca, pepperoni, chorizo, vita, pui, ton
+//Din nou, se afiseaza un meniu de carne, actualizat
+//carnati, bacon, sunca, pepperoni, chorizo, vita, pui, ton
     std::string numeCarne[]={"","carnati","bacon","sunca","pepperoni","chorizo","vita","pui","ton"};
     for (int i=1;i<=8;i++) {
         std::cout<<i<<" - "<<numeCarne[i]<<" ";
@@ -178,7 +181,8 @@ void Pizza::selectie_carne() const {
     std::cout<<"9 - Iesire\n";
 }
 void Pizza::selectie_legume() const {
-    //muraturi, masline, porumb, rosii, paprika, ceapa, jalapeno, ciuperci
+//Exact la fel ca la branza si carne, e oarecum copy-paste
+//muraturi, masline, porumb, rosii, paprika, ceapa, jalapeno, ciuperci
     std::string numeLegume[]={"","muraturi","masline","porumb","rosii","paprika","ceapa","jalapeno","ciuperci"};
     for (int i=1;i<=8;i++) {
         std::cout<<i<<" - "<<numeLegume[i]<<" ";
@@ -194,7 +198,7 @@ void Pizza::set_branza(int index, bool extra) {
     if (index >=1 && index <= 6) {
         branza[index].extra = extra;
         branza[index].selected = true;
-        if (index != 1)pret+=5;
+        if (index != 1)pret+=5;//se actualizeaza pretul in timp real
         if (extra) pret+=5;
     }
 }
@@ -202,7 +206,7 @@ void Pizza::set_carne(int index, bool extra) {
     if (index >=1 && index <= 8) {
         carne[index].extra = extra;
         carne[index].selected = true;
-        pret+=5;
+        pret+=5;//si aici pretul se actualizeaza
         if (extra) pret+=5;
     }
 }
@@ -210,7 +214,7 @@ void Pizza::set_legume(int index, bool extra) {
     if (index >=1 && index <= 8) {
         legume[index].extra = extra;
         legume[index].selected = true;
-        pret+=5;
+        pret+=5;//cum am mai zis devreme
         if (extra) pret+=5;
     }
 }

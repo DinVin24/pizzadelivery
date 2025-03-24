@@ -41,6 +41,7 @@ public:
     const Pizza& get_pizza() const { return pizza; }
 
     friend std::ostream& operator<<(std::ostream& os, const Client& client) {
+    //overload la <<
         os << "Client: " << client.nume << "\n" << client.adresa << client.pizza;
         return os;
     }
