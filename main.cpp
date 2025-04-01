@@ -6,7 +6,7 @@ Se citeste numarul la tastatura corespunzator deciziei (asta se va
                                 intampla la fiecare meniu intampinat)
 La adaugarea unui client,se creeaza un element in vectorul clienti care este
 obiect al clasei Client. Trebuie introduse numele si adresa
-(strada, numar, bloc apartament, creandu-se obiectul clasa pentru clientul nostru).
+(strada, numar, bloc apartament, creandu-se obiectul adresa pentru clientul nostru).
 Toate sunt siruri de caractere.
 Apoi se creaza obiectul pizza pentru client, iarasi suntem intampinati de meniuri
 de unde putem copia o pizza deja definita sau sa ne cream propria noastra pizza.
@@ -21,6 +21,7 @@ pizza (sos, branza, topping-uri, pret))
 La iesire se termina programul.
 **/
 
+#include <algorithm>
 #include "functii.cpp"
 int main()
 {
@@ -52,6 +53,7 @@ int main()
                 clienti.push_back(client_temp);
                 nrclienti++;
                 bani+=clienti[nrclienti - 1].getPizza().getPret();
+                std::sort(clienti.begin(), clienti.end(),conditie_sortare);
                 break;
             case 2:
                 int cod_client;

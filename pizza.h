@@ -60,7 +60,8 @@ public:
     }
     //Constructor de copiere
     Pizza(const Pizza& other)
-    : p_marime(other.p_marime), p_sos(other.p_sos), p_pret(other.p_pret), p_extra_sos(other.p_extra_sos)
+    : p_marime(other.p_marime), p_sos(other.p_sos),
+    p_pret(other.p_pret), p_extra_sos(other.p_extra_sos)
     {
         for (int i = 0; i < 6; i++)
         {

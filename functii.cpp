@@ -1,35 +1,44 @@
 #include "client.h"
 #include <iostream>
 #include <fstream>
-#include <vector>
-std::ifstream fin ("input.txt");
-Pizza clasica(1, 1, 1, 3, 8);
-Pizza vegetariana(1, 1, 1);
-Pizza pepperoni(1, 1);
-Pizza quattrostagioni(1, 1, 1);
-Pizza mediteraneana(1, 1, 1);
-Pizza cuTon(1, 1, 1, 8);
-Pizza mexicana(1, 1, 1, 2, 7);
-Pizza carnivora(1, 1, 1, 1);
-Pizza chefFav(1);
-void init_pizza()
-{
-    //Aici "gatim" meniul, pentru clientii fara mofturi
-    for (int i = 2; i <= 8; i++)
-    {
-        if (i == 7)continue;
-        vegetariana.setLegume(i);
+std::ifstream fin ("date.in");
+//foloseste un fisier din care sa iti construiesti pizza
+//si fa o sortare, poti sorta pizza alfabetic, clientii dupa pret
+Pizza pizzas[9];
+void init_pizza () {
+    int i = 0;
+    int x;
+    bool extra;
+    while (fin>>x) {
+        pizzas[i].setMarime(x);
+        fin>>x;
+        pizzas[i].setSos(x);
+        fin>>x;
+        pizzas[i].setExtraSos(x);
+        fin>>x;
+        while (x!=6) {
+            fin>>extra;
+            pizzas[i].setBranza(x,extra);
+            fin>>x;
+        }
+        fin>>x;
+        while (x!=9) {
+            fin>>extra;
+            pizzas[i].setCarne(x,extra);
+            fin>>x;
+        }
+        fin>>x;
+        while (x!=9) {
+            fin>>extra;
+            pizzas[i].setLegume(x,extra);
+            fin>>x;
+        }
+        i++;
     }
-    pepperoni.setBranza(1, true);
-    pepperoni.setCarne(4, true);
-    quattrostagioni.setCarne(3); quattrostagioni.setCarne(5);
-    quattrostagioni.setLegume(8); quattrostagioni.setLegume(5);
-    cuTon.setLegume(2); cuTon.setLegume(3); cuTon.setLegume(6);
-    mediteraneana.setBranza(2);
-    mediteraneana.setLegume(3); mediteraneana.setLegume(4);
-    mediteraneana.setLegume(2); mediteraneana.setLegume(6);
-    mexicana.setCarne(5); mexicana.setCarne(3);
-    carnivora.setCarne(4); carnivora.setCarne(6); carnivora.setCarne(3);
+
+}
+bool conditie_sortare(Client x, Client y) {
+    return x.getPizza().getPret() > y.getPizza().getPret();
 }
 
 void citire_pizza(Pizza& pizza);
@@ -57,15 +66,13 @@ void citire_date(Client& client)
 
     //Citim pizza clientului, mai intai alege dintr-un meniu apoi o modifica
     Pizza pizza; int option;
-    Pizza meniu[] = {clasica, vegetariana, pepperoni, quattrostagioni, mediteraneana,
-                cuTon, mexicana, carnivora, chefFav};
     std::cout << "Alegeti o pizza:\n1 - Clasica\n2 - Vegetariana\n3 - Pepperoni\n"
              << "4 - Quattro Stagioni\n5 - Mediteraneana\n6 - cu ton\n7 - Mexicana\n"
         << "8 - Carnivora\n9 - Preferata bucatarului <3\n0 - Creeaza propria pizza\n";
     std::cin >> option;
     if (option >= 1 && option <= 9)
     {
-        pizza = meniu[option - 1];
+        pizza = pizzas[option - 1];
     }
     citire_pizza(pizza);
     client.setPizza(pizza);
@@ -258,3 +265,32 @@ void Pizza::calculeazaPret()
     }
 }
 
+
+// Pizza clasica(1, 1, 1, 3, 8);
+// Pizza vegetariana(1, 1, 1);
+// Pizza pepperoni(1, 1);
+// Pizza quattrostagioni(1, 1, 1);
+// Pizza mediteraneana(1, 1, 1);
+// Pizza cuTon(1, 1, 1, 8);
+// Pizza mexicana(1, 1, 1, 2, 7);
+// Pizza carnivora(1, 1, 1, 1);
+// Pizza chefFav(1);
+// void init_pizza()
+// {
+//     //Aici "gatim" meniul, pentru clientii fara mofturi
+//     for (int i = 2; i <= 8; i++)
+//     {
+//         if (i == 7)continue;
+//         vegetariana.setLegume(i);
+//     }
+//     pepperoni.setBranza(1, true);
+//     pepperoni.setCarne(4, true);
+//     quattrostagioni.setCarne(3); quattrostagioni.setCarne(5);
+//     quattrostagioni.setLegume(8); quattrostagioni.setLegume(5);
+//     cuTon.setLegume(2); cuTon.setLegume(3); cuTon.setLegume(6);
+//     mediteraneana.setBranza(2);
+//     mediteraneana.setLegume(3); mediteraneana.setLegume(4);
+//     mediteraneana.setLegume(2); mediteraneana.setLegume(6);
+//     mexicana.setCarne(5); mexicana.setCarne(3);
+//     carnivora.setCarne(4); carnivora.setCarne(6); carnivora.setCarne(3);
+// }

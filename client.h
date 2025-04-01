@@ -1,6 +1,7 @@
 #include "adresa.h"
 #include "pizza.h"
 #include <string>
+#include <vector>
 
 class Client
 {
